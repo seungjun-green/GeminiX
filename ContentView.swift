@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var currentMode = "Simulation"
     let modes = ["ChatMode", "PromptEng", "Vision", "Simulation"]
-    
+    let tt = ["d"]
     var body: some View {
         VStack{
             Picker("", selection: $currentMode) {
