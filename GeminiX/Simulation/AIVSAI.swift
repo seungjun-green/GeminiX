@@ -132,7 +132,6 @@ struct AIVSAI: View {
     
     func findOtherString(givenString: String) -> String {
         
-        
         if users[0] == givenString {
             return users[1]
         } else {

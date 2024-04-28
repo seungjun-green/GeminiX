@@ -24,6 +24,7 @@ class CameraHandler: NSObject, ObservableObject {
         }
         
         if permissionGranted || !notFirstTime {
+            print("this part should be run twice!!!!")
             
             startCaptureSessionWithDelay()
         }
@@ -33,6 +34,38 @@ class CameraHandler: NSObject, ObservableObject {
         sessionQueue.async { [unowned self] in
             self.setupCaptureSession()
             self.captureSession.startRunning()
+        }
+    }
+    
+    func stopCamera() {
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.captureSession.stopRunning()
+            }
+        }
+    
+    func stopCaptureSession() {
+        if captureSession.isRunning {
+            captureSession.stopRunning()
+        }
+       
+     
+
+    }
+    
+    func tttt() {
+        captureSession.stopRunning()
+    }
+    
+    public func stopCaptureSession2() {
+        sessionQueue.async { [unowned self] in
+            captureSession.stopRunning()
+
+            for input in captureSession.inputs {
+                captureSession.removeInput(input)
+            }
+            for output in captureSession.outputs {
+                captureSession.removeOutput(output)
+            }
         }
     }
     

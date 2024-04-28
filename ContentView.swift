@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject var cameraManager = CameraHandler()
-    
+struct ContentView: View {    
     @State private var currentMode = "Simulation"
     let modes = ["ChatMode", "PromptEng", "Vision", "Simulation"]
     var body: some View {
@@ -27,30 +25,7 @@ struct ContentView: View {
                 Text("Coming soon!")
             } else if currentMode == "Vision" {
                 VStack{
-                    VStack{
-                        
-                        Vision()
-                        
-                        
-                        Button(action: {
-                            cameraManager.requestPermission()
-                        }) {
-                            Text("Set Camera Access")
-                                .bold()
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                        
-                        
-                        
-                    }
-                    
-                    
-                    
-                    
+                    Vision()
                 }
                 
             } else {
