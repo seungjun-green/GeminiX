@@ -9,7 +9,6 @@
 import SwiftUI
 import GoogleGenerativeAI
 
-
 struct AIVSAI: View {
     @State private var scrollProxy: ScrollViewProxy? = nil
     
@@ -64,10 +63,10 @@ struct AIVSAI: View {
                 hideSetting.toggle()
             }, label: {
                 if hideSetting {
-                    Text("Show")
+                    Text("Show Setting")
                     
                 } else {
-                    Text("Hide")
+                    Text("Hide Setting")
                 }
             })
             

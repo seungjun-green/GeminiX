@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var cameraManager = CameraHandler()
+    
     @State private var currentMode = "Simulation"
     let modes = ["ChatMode", "PromptEng", "Vision", "Simulation"]
-    let tt = ["d"]
     var body: some View {
         VStack{
             Picker("", selection: $currentMode) {
@@ -23,13 +24,39 @@ struct ContentView: View {
             if currentMode == "ChatMode" {
                 ChatView()
             } else if currentMode == "PromptEng" {
-               Text("Coming soon!")
+                Text("Coming soon!")
             } else if currentMode == "Vision" {
-                Text("Coming Soon!")
+                VStack{
+                    VStack{
+                        
+                        Vision()
+                        
+                        
+                        Button(action: {
+                            cameraManager.requestPermission()
+                        }) {
+                            Text("Set Camera Access")
+                                .bold()
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+                
             } else {
                 AIVSAI()
             }
-           
+            
         }
     }
 }

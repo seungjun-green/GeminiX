@@ -90,9 +90,10 @@ struct ChatView: View {
                                         context.delete(chats[index])
                                     }
                                 }
-                            }.onChange(of: ChatID, perform: { _ in
+                            }
+                            .onChange(of: ChatID) { oldValue, newValue in
                                 proxy.scrollTo(ChatID)
-                            })
+                            }
                             
                         }
                         .navigationTitle("Chats")

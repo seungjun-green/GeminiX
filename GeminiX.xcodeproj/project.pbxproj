@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C07408B12BDE644700301304 /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07408B02BDE644700301304 /* PermissionView.swift */; };
 		C0CF59922BDC8AC20073C02A /* GeminiXApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF59912BDC8AC20073C02A /* GeminiXApp.swift */; };
 		C0CF59942BDC8AC20073C02A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF59932BDC8AC20073C02A /* ContentView.swift */; };
 		C0CF59962BDC8AC40073C02A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0CF59952BDC8AC40073C02A /* Assets.xcassets */; };
@@ -24,9 +25,13 @@
 		C0CF59BB2BDC8CF30073C02A /* SimulationMessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF59BA2BDC8CF30073C02A /* SimulationMessageBubble.swift */; };
 		C0CF59BD2BDC8D210073C02A /* OtherViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF59BC2BDC8D210073C02A /* OtherViews.swift */; };
 		C0CF59BF2BDC8E510073C02A /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF59BE2BDC8E510073C02A /* APIKey.swift */; };
+		C0CF59C12BDD02BE0073C02A /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF59C02BDD02BE0073C02A /* CameraView.swift */; };
+		C0CF59C32BDD03060073C02A /* Vision.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF59C22BDD03060073C02A /* Vision.swift */; };
+		C0CF59C52BDD03560073C02A /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF59C42BDD03560073C02A /* CameraHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C07408B02BDE644700301304 /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
 		C0CF598E2BDC8AC20073C02A /* GeminiX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeminiX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0CF59912BDC8AC20073C02A /* GeminiXApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiXApp.swift; sourceTree = "<group>"; };
 		C0CF59932BDC8AC20073C02A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,6 +50,9 @@
 		C0CF59BA2BDC8CF30073C02A /* SimulationMessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationMessageBubble.swift; sourceTree = "<group>"; };
 		C0CF59BC2BDC8D210073C02A /* OtherViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherViews.swift; sourceTree = "<group>"; };
 		C0CF59BE2BDC8E510073C02A /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		C0CF59C02BDD02BE0073C02A /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		C0CF59C22BDD03060073C02A /* Vision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vision.swift; sourceTree = "<group>"; };
+		C0CF59C42BDD03560073C02A /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +136,10 @@
 		C0CF59AA2BDC8BA20073C02A /* Vision */ = {
 			isa = PBXGroup;
 			children = (
+				C07408B02BDE644700301304 /* PermissionView.swift */,
+				C0CF59C02BDD02BE0073C02A /* CameraView.swift */,
+				C0CF59C22BDD03060073C02A /* Vision.swift */,
+				C0CF59C42BDD03560073C02A /* CameraHandler.swift */,
 			);
 			path = Vision;
 			sourceTree = "<group>";
@@ -217,16 +229,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0CF59BF2BDC8E510073C02A /* APIKey.swift in Sources */,
+				C0CF59C12BDD02BE0073C02A /* CameraView.swift in Sources */,
 				C0CF59B72BDC8CB10073C02A /* AIVSAI.swift in Sources */,
 				C0CF59B22BDC8C500073C02A /* ChatDetailsView.swift in Sources */,
 				C0CF59BB2BDC8CF30073C02A /* SimulationMessageBubble.swift in Sources */,
+				C0CF59C52BDD03560073C02A /* CameraHandler.swift in Sources */,
 				C0CF59A32BDC8B3C0073C02A /* Speech.swift in Sources */,
 				C0CF59A52BDC8B540073C02A /* SwiftData.swift in Sources */,
 				C0CF59A72BDC8B760073C02A /* ModelManager.swift in Sources */,
 				C0CF59B42BDC8C640073C02A /* ChatView.swift in Sources */,
 				C0CF59942BDC8AC20073C02A /* ContentView.swift in Sources */,
 				C0CF59922BDC8AC20073C02A /* GeminiXApp.swift in Sources */,
+				C07408B12BDE644700301304 /* PermissionView.swift in Sources */,
 				C0CF59B02BDC8C260073C02A /* ChatMessageBubble.swift in Sources */,
+				C0CF59C32BDD03060073C02A /* Vision.swift in Sources */,
 				C0CF59B92BDC8CE00073C02A /* SimulationSettings.swift in Sources */,
 				C0CF59BD2BDC8D210073C02A /* OtherViews.swift in Sources */,
 			);
@@ -367,6 +383,7 @@
 				DEVELOPMENT_TEAM = TC55M6A6Z4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "to show live view";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -401,6 +418,7 @@
 				DEVELOPMENT_TEAM = TC55M6A6Z4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "to show live view";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
