@@ -7,6 +7,15 @@
 
 import AVFoundation
 import CoreImage
+import UIKit
+
+extension CameraHandler {
+    func captureUIImage() -> UIImage? {
+        guard let cgImage = self.frame else { return nil }
+        return UIImage(cgImage: cgImage)
+    }
+}
+
 
 class CameraHandler: NSObject, ObservableObject {
     @Published var frame: CGImage?
@@ -29,6 +38,9 @@ class CameraHandler: NSObject, ObservableObject {
             startCaptureSessionWithDelay()
         }
     }
+    
+   
+    
     
     public func startCaptureSession() {
         sessionQueue.async { [unowned self] in

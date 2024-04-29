@@ -7,12 +7,31 @@
 
 import Foundation
 import GoogleGenerativeAI
+import UIKit
 
 class ModelManager {
     private var model: GenerativeModel
+    private var imageModel: GenerativeModel
     
     init() {
         self.model = GenerativeModel(name: "gemini-pro", apiKey: APIKey.default)
+        self.imageModel = GenerativeModel(name: "gemini-pro-vision", apiKey: APIKey.default)
+    }
+    
+    func askImageQuestion(prompt: String, image1: UIImage) async -> String {
+        let prompt = "What do you see here?"
+        var result = ""
+        do {
+            let response = try await imageModel.generateContent(prompt, image1)
+            if let text = response.text {
+                print(text)
+                result = text
+            }
+            return result
+        } catch {
+            print("An error occurred: \(error)")
+            return "An error occurred while processing the image."
+        }
     }
     
     func generateString(from prompt: String, completion: @escaping (Result<String, Error>) -> Void) {

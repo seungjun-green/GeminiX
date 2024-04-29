@@ -13,8 +13,9 @@ struct Vision: View {
     @State private var video: CIImage?
     @State var notFirstTime = UserDefaults.standard.bool(forKey: "notFirstTime")
     @State var moveToMain = false
-    
     @State var holdView = false
+    
+    let modelManager = ModelManager()
     
     var body: some View {
 //        CameraView(image: cameraManager.frame).environmentObject(cameraManager).ignoresSafeArea()
@@ -49,6 +50,26 @@ struct Vision: View {
                 cameraManager.stopCaptureSession()
             } label: {
                 Text("Stop")
+            }
+            
+            
+            Button {
+                askQuestion()
+            } label: {
+                Text("Ask Question")
+            }
+
+        }
+    }
+    
+    func askQuestion() {
+        if let capturedImage = cameraManager.captureUIImage() {
+            Task {
+                let result = await modelManager.askImageQuestion(prompt: "Hello", image1: capturedImage)
+                print("Received response: \(result)")
+                DispatchQueue.main.async {
+                    
+                }
             }
         }
     }
