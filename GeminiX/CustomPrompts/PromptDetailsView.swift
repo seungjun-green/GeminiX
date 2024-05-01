@@ -15,60 +15,95 @@ struct PromptDetailsView: View {
     
     @State private var promptName = ""
     @State private var parentPrompt = ""
-    @State private var childPrompt1 = ""
-    @State private var childPrompt2 = ""
-    @State private var childPrompt3 = ""
-    @State private var childPrompt4 = ""
-    @State private var childPrompt5 = ""
-    @State private var childPrompt6 = ""
-    @State private var childPrompt7 = ""
-    @State private var childPrompt8 = ""
-    @State private var childPrompt9 = ""
-    @State private var childPrompt10 = ""
-    
     @State private var childPrompts = [String]()
     @State private var childNames = [String]()
     
     @State private var response = ""
     
+    @State private var hideChilds = false
+    @State private var generating = false
+    
     var body: some View {
-        VStack{
+        ScrollView{
             
             VStack{
-                Text("Prompt Name")
-                TextField("Name", text: $promptName).onChange(of: promptName) { oldValue, newValue in
-                    prompt.name = promptName
+                HStack{
+                    Text("Prompt Name").font(.title)
+                    Spacer()
                 }
-            }
+                
+                
+                TextField("Name", text: $promptName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                    .onChange(of: promptName) { oldValue, newValue in
+                        prompt.name = promptName
+                    }
+            } .padding(.horizontal)
+            
+            
+            Divider()
             
             
             VStack{
-                Text("Parent's Prompt")
-                TextField("Parent Prompt", text: $parentPrompt, axis: .vertical).onChange(of: parentPrompt) { oldValue, newValue in
-                    prompt.parentPrompt = parentPrompt
-                    childNames = extractPlaceholders(input: parentPrompt)
+                HStack{
+                    Text("Parent's Prompt").font(.title3)
+                    Spacer()
                 }
-            }
+                TextField("Parent Prompt", text: $parentPrompt, axis: .vertical)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .onChange(of: parentPrompt) { oldValue, newValue in
+                        prompt.parentPrompt = parentPrompt
+                        childNames = extractPlaceholders(input: parentPrompt)
+                    }
+            }.padding(.horizontal)
             
-            VStack{
-                ForEach($childNames.indices, id: \.self) { index in
-                    
-                    VStack{
-                        
-                        Text(childNames[index])
-                        TextField("\(childPrompts[index])", text: $childPrompts[index])
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding()
+            
+            
+            HStack {
+                Button {
+                    hideChilds.toggle()
+                } label: {
+                    if hideChilds {
+                        Text("Show Child Prompts")
+                    } else {
+                        Text("Hide Child Prompts")
                     }
                     
                 }
-            }.onChange(of: childPrompts) { oldValue, newValue in
-                prompt.childPrompts = childPrompts
+                
+                Spacer()
+                
+            }.padding(.horizontal)
+            
+            if !hideChilds {
+                VStack{
+                    ForEach($childNames.indices, id: \.self) { index in
+                        
+                        VStack{
+                            
+                            
+                            HStack{
+                                Text(childNames[index]).font(.title3)
+                                Spacer()
+                            }
+                            
+                            TextField("\(childPrompts[index])", text: $childPrompts[index], axis: .vertical)
+                                .lineLimit(7)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            
+                        }.padding(.horizontal)
+                        
+                    }
+                }.onChange(of: childPrompts) { oldValue, newValue in
+                    prompt.childPrompts = childPrompts
+                }
+                
             }
             
             
             Button {
-                //
+                generating = true
                 print(replacePlaceholders(template: parentPrompt, values: childPrompts))
                 let prompt = replacePlaceholders(template: parentPrompt, values: childPrompts)
                 
@@ -77,17 +112,39 @@ struct PromptDetailsView: View {
                     case .success(let text):
                         print(text)
                         response = text
+                        generating = false
                     case .failure(let error):
                         print("Error generating content: \(error.localizedDescription)")
+                        generating = false
                     }
                 }
                 
             } label: {
-                Text("Generate Resonse")
+                VStack{
+                    if generating {
+                        Text("Generating...")
+                    } else {
+                        Text("Generate Resonse")
+                    }
+                }
+                
             }
             
             
-            Text(response)
+            VStack{
+                HStack{
+                    Text("Result").font(.title3)
+                    Spacer()
+                }
+                
+                TextField("", text: $response, axis: .vertical)
+                    .lineLimit(7)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+            }.padding(.horizontal)
+
+            
+          
+          
             
             
             
@@ -137,5 +194,5 @@ struct PromptDetailsView: View {
             String(input[Range($0.range(at: 1), in: input)!])
         }
     }
-
+    
 }
