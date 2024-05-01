@@ -17,9 +17,7 @@ struct Vision: View {
     
     let modelManager = ModelManager()
     
-    var body: some View {
-        
-        
+    var body: some View {        
         VStack{
             if !notFirstTime && !moveToMain {
                 PermissionView(moveToMain: $moveToMain).environmentObject(cameraManager)

@@ -30,7 +30,7 @@ struct AIVSAISetting: View {
                         .onChange(of: user1) { oldValue, newValue in
                             users[0] = newValue
                         }
-                }.roundedBorder(color: .orange, lineWidth: 1, cornerRadius: 20)
+                }
                 
                 
                 Spacer()
@@ -41,7 +41,7 @@ struct AIVSAISetting: View {
                         .onChange(of: user2) { oldValue, newValue in
                             users[1] = newValue
                         }
-                }.roundedBorder(color: .orange, lineWidth: 1, cornerRadius: 20)
+                }
                 
                 
             }.padding()
@@ -68,7 +68,10 @@ struct AIVSAISetting: View {
             
             
             
-        }.roundedBorder(color: .red, lineWidth: 3, cornerRadius: 20)
+        }.background(Color(UIColor.systemBackground))
+            .cornerRadius(20)
+            .shadow(color: .black, radius: 10)
+
         .padding(.horizontal)
     }
 }

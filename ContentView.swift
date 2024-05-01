@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {    
-    @State private var currentMode = "Simulation"
+    @State private var currentMode = "ChatMode"
     let modes = ["ChatMode", "PromptEng", "Vision", "Simulation"]
     var body: some View {
         VStack{
@@ -19,19 +19,13 @@ struct ContentView: View {
             }
             .pickerStyle(.segmented)
             
-            if currentMode == "ChatMode" {
-                ChatView()
-            } else if currentMode == "PromptEng" {
-                CustomPromptsView()
-            } else if currentMode == "Vision" {
-                VStack{
-                    Vision()
-                }
-                
-            } else {
-                AIVSAI()
-            }
             
+            switch(currentMode) {
+            case "ChatMode": ChatView()
+            case "PromptEng": CustomPromptsView()
+            case "Vision": Vision()
+            default: AIVSAI()
+            }
         }
     }
 }
