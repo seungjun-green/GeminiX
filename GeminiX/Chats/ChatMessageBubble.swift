@@ -10,6 +10,7 @@ import SwiftUI
 import UIKit
 import AVFoundation
 
+
 struct MessageBubble: View {
     var isHuman: Bool
     var text: String
@@ -102,7 +103,4 @@ struct MessageBubble: View {
             }
         }
     }
-    
- 
-
 }

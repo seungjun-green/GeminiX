@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C07408B12BDE644700301304 /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07408B02BDE644700301304 /* PermissionView.swift */; };
+		C07408B42BE1404000301304 /* CustomPrompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07408B32BE1404000301304 /* CustomPrompts.swift */; };
+		C07408B62BE1CC0D00301304 /* PromptDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07408B52BE1CC0D00301304 /* PromptDetailsView.swift */; };
 		C0CF59922BDC8AC20073C02A /* GeminiXApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF59912BDC8AC20073C02A /* GeminiXApp.swift */; };
 		C0CF59942BDC8AC20073C02A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF59932BDC8AC20073C02A /* ContentView.swift */; };
 		C0CF59962BDC8AC40073C02A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0CF59952BDC8AC40073C02A /* Assets.xcassets */; };
@@ -32,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		C07408B02BDE644700301304 /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
+		C07408B32BE1404000301304 /* CustomPrompts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPrompts.swift; sourceTree = "<group>"; };
+		C07408B52BE1CC0D00301304 /* PromptDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptDetailsView.swift; sourceTree = "<group>"; };
 		C0CF598E2BDC8AC20073C02A /* GeminiX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeminiX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0CF59912BDC8AC20073C02A /* GeminiXApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiXApp.swift; sourceTree = "<group>"; };
 		C0CF59932BDC8AC20073C02A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,17 +71,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C07408B22BE13F5000301304 /* Brain */ = {
+			isa = PBXGroup;
+			children = (
+				C0CF59A62BDC8B760073C02A /* ModelManager.swift */,
+				C0CF59A42BDC8B540073C02A /* SwiftData.swift */,
+				C0CF59A22BDC8B3B0073C02A /* Speech.swift */,
+				C0CF59BE2BDC8E510073C02A /* APIKey.swift */,
+			);
+			path = Brain;
+			sourceTree = "<group>";
+		};
 		C0CF59852BDC8AC20073C02A = {
 			isa = PBXGroup;
 			children = (
-				C0CF59BE2BDC8E510073C02A /* APIKey.swift */,
 				C0CF59A02BDC8B110073C02A /* GenerativeAI-Info.plist */,
 				C0CF599F2BDC8AD10073C02A /* GeminiX.entitlements */,
+				C07408B22BE13F5000301304 /* Brain */,
 				C0CF59912BDC8AC20073C02A /* GeminiXApp.swift */,
-				C0CF59A22BDC8B3B0073C02A /* Speech.swift */,
-				C0CF59A42BDC8B540073C02A /* SwiftData.swift */,
 				C0CF59932BDC8AC20073C02A /* ContentView.swift */,
-				C0CF59A62BDC8B760073C02A /* ModelManager.swift */,
 				C0CF59902BDC8AC20073C02A /* GeminiX */,
 				C0CF598F2BDC8AC20073C02A /* Products */,
 			);
@@ -147,6 +159,8 @@
 		C0CF59AB2BDC8BAC0073C02A /* CustomPrompts */ = {
 			isa = PBXGroup;
 			children = (
+				C07408B32BE1404000301304 /* CustomPrompts.swift */,
+				C07408B52BE1CC0D00301304 /* PromptDetailsView.swift */,
 			);
 			path = CustomPrompts;
 			sourceTree = "<group>";
@@ -228,7 +242,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C07408B42BE1404000301304 /* CustomPrompts.swift in Sources */,
 				C0CF59BF2BDC8E510073C02A /* APIKey.swift in Sources */,
+				C07408B62BE1CC0D00301304 /* PromptDetailsView.swift in Sources */,
 				C0CF59C12BDD02BE0073C02A /* CameraView.swift in Sources */,
 				C0CF59B72BDC8CB10073C02A /* AIVSAI.swift in Sources */,
 				C0CF59B22BDC8C500073C02A /* ChatDetailsView.swift in Sources */,

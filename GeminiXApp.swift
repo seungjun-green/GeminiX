@@ -13,6 +13,6 @@ struct GeminiXApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView().environmentObject(SpeechSynthesizerManager())
-        }.modelContainer(for: [Chat.self, ChatDetails.self])
+        }.modelContainer(for: [Chat.self, ChatDetails.self, CustomPrompts.self])
     }
 }

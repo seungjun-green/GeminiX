@@ -15,7 +15,6 @@ struct ChatView: View {
     @Query(sort: \Chat.date, order: .reverse) var chats: [Chat]
     @Environment(\.modelContext) var context
     @State private var selectedChat: Chat? = nil
-    @State private var selectedAIMode: String? = nil
     @State private var columnVisibility = NavigationSplitViewVisibility.all
     @State private var editingMode = false
     @State var ChatID = Date()

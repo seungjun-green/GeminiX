@@ -18,17 +18,23 @@ struct Vision: View {
     let modelManager = ModelManager()
     
     var body: some View {
-//        CameraView(image: cameraManager.frame).environmentObject(cameraManager).ignoresSafeArea()
-        if !notFirstTime && !moveToMain {
-            PermissionView(moveToMain: $moveToMain).environmentObject(cameraManager)
-        } else {
-            if holdView {
-                Text("HOOOOOLD")
+        
+        
+        VStack{
+            if !notFirstTime && !moveToMain {
+                PermissionView(moveToMain: $moveToMain).environmentObject(cameraManager)
             } else {
-                CameraView(image: cameraManager.frame).environmentObject(cameraManager).ignoresSafeArea()
+                if holdView {
+                    Text("HOOOOOLD")
+                } else {
+                    CameraView(image: cameraManager.frame).environmentObject(cameraManager).ignoresSafeArea()
+                }
+               
             }
-           
+        }.onDisappear{
+            cameraManager.stopCaptureSession()
         }
+        
         
 
         

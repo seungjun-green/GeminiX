@@ -146,7 +146,6 @@ Input:
                     }
                     
                     
-                    
                     TextField("Message Gemmini", text: $messageText, axis: .vertical)
                         .padding(.horizontal)
                         .onSubmit {

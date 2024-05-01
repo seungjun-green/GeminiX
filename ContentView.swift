@@ -22,7 +22,7 @@ struct ContentView: View {
             if currentMode == "ChatMode" {
                 ChatView()
             } else if currentMode == "PromptEng" {
-                Text("Coming soon!")
+                CustomPromptsView()
             } else if currentMode == "Vision" {
                 VStack{
                     Vision()
