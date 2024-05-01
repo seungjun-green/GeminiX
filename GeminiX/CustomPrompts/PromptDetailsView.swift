@@ -27,6 +27,7 @@ struct PromptDetailsView: View {
     @State private var childPrompt10 = ""
     
     @State private var childNames = [String]()
+    @State private var copyOfchildNames = [String]()
     
     @State private var response = ""
     
@@ -46,15 +47,21 @@ struct PromptDetailsView: View {
                 TextField("Parent Prompt", text: $parentPrompt, axis: .vertical).onChange(of: parentPrompt) { oldValue, newValue in
                     prompt.parentPrompt = parentPrompt
                     childNames = extractPlaceholders(input: parentPrompt)
-                    print(childNames)
+                    copyOfchildNames = childNames
                 }
             }
             
             VStack{
                 ForEach($childNames.indices, id: \.self) { index in
-                    TextField("\(childNames[index])", text: $childNames[index])
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
+                    
+                    VStack{
+                        
+                        Text(copyOfchildNames[index])
+                        TextField("\(childNames[index])", text: $childNames[index])
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding()
+                    }
+                    
                 }
             }
             
@@ -64,7 +71,7 @@ struct PromptDetailsView: View {
             } label: {
                 Text("Generate Resonse")
             }
-
+            
             
             Text(response)
             
@@ -73,7 +80,12 @@ struct PromptDetailsView: View {
         }.onAppear{
             promptName = prompt.name
             parentPrompt = prompt.parentPrompt
+            childNames = extractPlaceholders(input: parentPrompt)
+            copyOfchildNames = childNames
+         
         }
+        
+        
     }
     
     func extractPlaceholders(input: String) -> [String] {
