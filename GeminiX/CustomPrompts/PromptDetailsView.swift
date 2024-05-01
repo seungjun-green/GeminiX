@@ -26,8 +26,8 @@ struct PromptDetailsView: View {
     @State private var childPrompt9 = ""
     @State private var childPrompt10 = ""
     
+    @State private var childPrompts = [String]()
     @State private var childNames = [String]()
-    @State private var copyOfchildNames = [String]()
     
     @State private var response = ""
     
@@ -47,7 +47,6 @@ struct PromptDetailsView: View {
                 TextField("Parent Prompt", text: $parentPrompt, axis: .vertical).onChange(of: parentPrompt) { oldValue, newValue in
                     prompt.parentPrompt = parentPrompt
                     childNames = extractPlaceholders(input: parentPrompt)
-                    copyOfchildNames = childNames
                 }
             }
             
@@ -56,18 +55,33 @@ struct PromptDetailsView: View {
                     
                     VStack{
                         
-                        Text(copyOfchildNames[index])
-                        TextField("\(childNames[index])", text: $childNames[index])
+                        Text(childNames[index])
+                        TextField("\(childPrompts[index])", text: $childPrompts[index])
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .padding()
                     }
                     
                 }
+            }.onChange(of: childPrompts) { oldValue, newValue in
+                prompt.childPrompts = childPrompts
             }
             
             
             Button {
                 //
+                print(replacePlaceholders(template: parentPrompt, values: childPrompts))
+                let prompt = replacePlaceholders(template: parentPrompt, values: childPrompts)
+                
+                modelManager.generateString(from: prompt) { result in
+                    switch result {
+                    case .success(let text):
+                        print(text)
+                        response = text
+                    case .failure(let error):
+                        print("Error generating content: \(error.localizedDescription)")
+                    }
+                }
+                
             } label: {
                 Text("Generate Resonse")
             }
@@ -81,12 +95,38 @@ struct PromptDetailsView: View {
             promptName = prompt.name
             parentPrompt = prompt.parentPrompt
             childNames = extractPlaceholders(input: parentPrompt)
-            copyOfchildNames = childNames
-         
+            
+            
+            childPrompts = prompt.childPrompts
+            
+            
+            if childPrompts.isEmpty {
+                childPrompts = childNames
+                prompt.childPrompts = childPrompts
+                
+            }
         }
         
         
     }
+    
+    func replacePlaceholders(template: String, values: [String]) -> String {
+        let pattern = "\\{(.*?)\\}"
+        let regex = try! NSRegularExpression(pattern: pattern)
+        let nsrange = NSRange(template.startIndex..<template.endIndex, in: template)
+        
+        let matches = regex.matches(in: template, options: [], range: nsrange)
+        var result = template
+        
+        for (index, match) in matches.reversed().enumerated() {
+            guard index < values.count else { break }
+            let matchRange = Range(match.range, in: template)!
+            result.replaceSubrange(matchRange, with: values[index])
+        }
+        
+        return result
+    }
+    
     
     func extractPlaceholders(input: String) -> [String] {
         let pattern = "\\{(.*?)\\}"
@@ -97,12 +137,5 @@ struct PromptDetailsView: View {
             String(input[Range($0.range(at: 1), in: input)!])
         }
     }
-    
-    //    func save() {
-    //        do {
-    //            try context.save()
-    //        } catch {
-    //            print("Saving failed - error happend at PromptDetailsView")
-    //        }
-    //    }
+
 }
