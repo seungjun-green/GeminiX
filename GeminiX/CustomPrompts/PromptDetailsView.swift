@@ -26,7 +26,7 @@ struct PromptDetailsView: View {
     @State private var titleEdit = false
     @State private var textCopied = false
     
-    
+    @State private var correctFormat = true
     
     var body: some View {
         ScrollView{
@@ -65,75 +65,98 @@ struct PromptDetailsView: View {
                 HStack{
                     Text("Parent's Prompt").font(.title2).fontWeight(.medium)
                     Spacer()
+                    
+                    Circle().frame(width: 20, height: 20)
+                        .foregroundColor(correctFormat ? .green : .red)
                 }
+                
                 TextField("Parent Prompt", text: $parentPrompt, axis: .vertical)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .onChange(of: parentPrompt) { oldValue, newValue in
-                        prompt.parentPrompt = parentPrompt
-                        childNames = extractPlaceholders(input: parentPrompt)
-                    }
-            }.padding(.horizontal)
-            
-            
-           
-            
-            VStack{
-                ForEach($childNames.indices, id: \.self) { index in
-                    
-                    VStack{
                         
+                        // check if format is correct
+                        // if format is not correct, set the stopWorking to True.
                         
-                        HStack{
-                            Text("- \(childNames[index])").font(.title3)
-                            Spacer()
+                        correctFormat = checkForamt(parentPrompt: parentPrompt)
+                        
+                        if correctFormat {
+                            prompt.parentPrompt = parentPrompt
+                            childNames = extractPlaceholders(input: parentPrompt)
+                            childPrompts = childNames
                         }
                         
-                        TextField("\(childPrompts[index])", text: $childPrompts[index], axis: .vertical)
-                            .lineLimit(7)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
                         
-                    }.padding(.horizontal)
+                    }
+            }.padding(.horizontal)
+                .onAppear{
+                    correctFormat = checkForamt(parentPrompt: parentPrompt)
+                }
+            
+           
+           
+            if correctFormat {
+                VStack{
+                    ForEach($childNames.indices, id: \.self) { index in
+                        
+                        VStack{
+                            
+                            
+                            HStack{
+                                Text("- \(childNames[index])").font(.title3)
+                                Spacer()
+                            }
+                            
+                            TextField("\(childPrompts[index])", text: $childPrompts[index], axis: .vertical)
+                                .lineLimit(7)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            
+                        }.padding(.horizontal)
+                        
+                    }
+                }.onChange(of: childPrompts) { oldValue, newValue in
+                    prompt.childPrompts = childPrompts
+                }
+                
+                
+                Button {
+                    generating = true
+                    print(replacePlaceholders(template: parentPrompt, values: childPrompts))
+                    let prompt = replacePlaceholders(template: parentPrompt, values: childPrompts)
+                    
+                    modelManager.generateString(from: prompt) { result in
+                        switch result {
+                        case .success(let text):
+                            print(text)
+                            response = text
+                            generating = false
+                        case .failure(let error):
+                            print("Error generating content: \(error.localizedDescription)")
+                            generating = false
+                        }
+                    }
+                    
+                } label: {
+                    VStack{
+                        if generating {
+                            ProgressView().frame(height: 50)
+                        } else {
+                            Text("Generate Resonse")
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(10)
+                                .frame(height: 50)
+                        }
+                    }.padding(.top)
                     
                 }
-            }.onChange(of: childPrompts) { oldValue, newValue in
-                prompt.childPrompts = childPrompts
-            }
-            
-            
-            
-            
-            Button {
-                generating = true
-                print(replacePlaceholders(template: parentPrompt, values: childPrompts))
-                let prompt = replacePlaceholders(template: parentPrompt, values: childPrompts)
-                
-                modelManager.generateString(from: prompt) { result in
-                    switch result {
-                    case .success(let text):
-                        print(text)
-                        response = text
-                        generating = false
-                    case .failure(let error):
-                        print("Error generating content: \(error.localizedDescription)")
-                        generating = false
-                    }
-                }
-                
-            } label: {
-                VStack{
-                    if generating {
-                        ProgressView().frame(height: 50)
-                    } else {
-                        Text("Generate Resonse")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                            .frame(height: 50)
-                    }
-                }.padding(.top)
+
                 
             }
+            
+            
+            
+        
             
             
             VStack{
@@ -191,6 +214,33 @@ struct PromptDetailsView: View {
         
         
     }
+    
+    func checkForamt(parentPrompt: String) -> Bool {
+        var stack = [Character]()
+        
+        for curr in parentPrompt {
+            if curr == "{" || curr == "}"{
+                stack.append(curr)
+            }
+            
+         
+            
+            if stack.count > 1 && stack.last == "}" && stack.dropLast(1).last == "{" {
+                stack.removeLast(2)
+            }
+        }
+        
+        
+        print(stack)
+        if stack.count == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    
+
     
     func replacePlaceholders(template: String, values: [String]) -> String {
         let pattern = "\\{(.*?)\\}"
