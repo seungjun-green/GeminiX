@@ -59,20 +59,9 @@ struct AIVSAI: View {
     var body: some View {
         
         VStack{
-            Button(action: {
-                hideSetting.toggle()
-            }, label: {
-                if hideSetting {
-                    Text("Show Setting")
-                    
-                } else {
-                    Text("Hide Setting")
-                }
-            })
             
-            if !hideSetting {
-                AIVSAISetting(user1: $user1, user2: $user2, users: $users, selectedUser: $selectedUser, firstMessage: $firstMessage)
-            }
+            AIVSAISetting(user1: $user1, user2: $user2, users: $users, selectedUser: $selectedUser, firstMessage: $firstMessage, hide: $hideSetting)
+            
             
             
             HStack{
@@ -102,7 +91,7 @@ struct AIVSAI: View {
                 } label: {
                     Text("Clear Chat History")
                 }
-
+                
             }
             
             
@@ -111,7 +100,7 @@ struct AIVSAI: View {
             
             
         }
-
+        
         ScrollView {
             ScrollViewReader { proxy in
                 VStack{
@@ -124,10 +113,10 @@ struct AIVSAI: View {
                 }
             }
         }.padding([.top, .bottom])
-        .onChange(of: messages) { oldValue, newValue in
-            scrollToBottom()
-            scrollToBottom2()
-        }
+            .onChange(of: messages) { oldValue, newValue in
+                scrollToBottom()
+                scrollToBottom2()
+            }
     }
     
     func findOtherString(givenString: String) -> String {
@@ -173,7 +162,6 @@ struct AIVSAI: View {
             // If the word is not found, return the original string
             return string
         }
-        
         print("Start removed")
         return string.replacingCharacters(in: range, with: "").trimmingCharacters(in: .whitespacesAndNewlines)
     }
@@ -187,10 +175,6 @@ struct AIVSAI: View {
         let data = constuctPrompt()
         let prompt = data[0]
         let userToReply = data[1]
-        
-        print("=====")
-        print(userToReply)
-        print("=====")
         
         modelManager.generateStringSteam(prompt: initalPrompt + prompt, onChunkReceived: { chunk in
             AI_response += chunk
@@ -219,44 +203,4 @@ struct AIVSAI: View {
             
         })
     }
-    
-    
-    //        func performActions() {
-    //            generating = true
-    //
-    //            // generate AI's response
-    //            let history = constuctHistory()
-    //
-    //            let totalCount = messages.count
-    //            let mostRecentOne = messages.sorted(by: { $0.date < $1.date})[totalCount-1]
-    //
-    //            // get AI's response
-    //            var AI_response = ""
-    //
-    //            modelManager.chatModeStream(prompt: mostRecentOne.message, history: history, onChunkReceived: { chunk in
-    //                print(chunk)
-    //                AI_response += chunk
-    //                DispatchQueue.main.async {
-    //                    AIResponse = AI_response
-    //                }
-    //            }, completion: { error in
-    //                DispatchQueue.main.async {
-    //                    if let error = error {
-    //                        print("Error generating content: \(error.localizedDescription)")
-    //                    } else {
-    //                        print("Streaming complete.")
-    //                    }
-    //
-    //                    generating = false
-    //
-    //                    // add messges to chat history
-    //                    messages.append(GeminiMessage(user: "model", message: AI_response))
-    //
-    //
-    //                    AI_response = ""
-    //                    AIResponse = ""
-    //
-    //                }
-    //            })
-    //        }
 }
