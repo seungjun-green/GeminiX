@@ -24,36 +24,36 @@ struct Vision: View {
     
     
     var body: some View {
-        
         VStack{
+        VStack{
+            
+            Button(action: {
+                
+                if userIsSpeaking {
+                    stopRecording()
+                } else {
+                    transcribedText = ""
+                    Speech.requestPermission()
+                    startRecording()
+                }
+                
+                userIsSpeaking.toggle()
+                
+            }, label: {
+                if userIsSpeaking {
+                    Text("Stop Listening..")
+                } else {
+                    VStack{
+                        Image(systemName: "mic.circle")
+                            .resizable()
+                            .foregroundColor(.blue)
+                            .frame(width: 70, height: 70)
+                    }.frame(height: 110)
+                }
+            })
+        }
         
-        Button(action: {
-            
-            if userIsSpeaking {
-                stopRecording()
-            } else {
-                transcribedText = ""
-                Speech.requestPermission()
-                startRecording()
-            }
-            
-            userIsSpeaking.toggle()
-            
-        }, label: {
-            if userIsSpeaking {
-                Text("Stop Listening..")
-            } else {
-                VStack{
-                    Image(systemName: "mic.circle")
-                        .resizable()
-                        .foregroundColor(.blue)
-                        .frame(width: 70, height: 70)
-                }.frame(height: 110)
-            }
-        })
-    }
-
-    
+        
         
         VStack{
             VStack{
@@ -104,8 +104,8 @@ struct Vision: View {
         }.onDisappear{
             cameraManager.stopCaptureSession()
         }
-                
         
+    }
         
     }
     

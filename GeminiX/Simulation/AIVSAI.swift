@@ -57,73 +57,74 @@ struct AIVSAI: View {
     }
     
     var body: some View {
-        
         VStack{
-            
-            AIVSAISetting(user1: $user1, user2: $user2, users: $users, selectedUser: $selectedUser, firstMessage: $firstMessage, hide: $hideSetting).padding(.top)
-            
-            
-            HStack{
-                Spacer()
+            VStack{
                 
-                Button {
-                    messages = []
-                } label: {
-                    Label("Clear Chat History", systemImage: "xmark.circle")
-                        .foregroundColor(.red)
-                }
-            }.padding()
-            
-            HStack{
-                
-                Button {
-                    if messages.count == 0 {
-                        hideSetting = true
-                        let newMessage = GeminiMessage(user: selectedUser, message: firstMessage)
-                        messages.append(newMessage)
-                    } else {
-                        hideSetting = true
-                        getAIResponse()
-                    }
-                } label: {
-                    VStack{
-                        if generating {
-                            ProgressView()
-                        } else {
-                            Text("Generate next conversation")
-                                .disabled(!canStartConv)
-                        }
-                    }.frame(height: 50)
-                }
+                AIVSAISetting(user1: $user1, user2: $user2, users: $users, selectedUser: $selectedUser, firstMessage: $firstMessage, hide: $hideSetting).padding(.top)
                 
                 
-                
-                
-            }
-            
-            
-            
-            
-            
-            
-        }
-        
-        ScrollView {
-            ScrollViewReader { proxy in
-                VStack{
-                    ForEach(messages, id: \.self) { currMessage in
-                        MessageView(name: currMessage.user, messageText: currMessage.message, order: users.firstIndex(of: currMessage.user)!).id(currMessage.id)
-                    }.onAppear {
-                        scrollProxy = proxy
-                    }
+                HStack{
                     Spacer()
+                    
+                    Button {
+                        messages = []
+                    } label: {
+                        Label("Clear Chat History", systemImage: "xmark.circle")
+                            .foregroundColor(.red)
+                    }
+                }.padding()
+                
+                HStack{
+                    
+                    Button {
+                        if messages.count == 0 {
+                            hideSetting = true
+                            let newMessage = GeminiMessage(user: selectedUser, message: firstMessage)
+                            messages.append(newMessage)
+                        } else {
+                            hideSetting = true
+                            getAIResponse()
+                        }
+                    } label: {
+                        VStack{
+                            if generating {
+                                ProgressView()
+                            } else {
+                                Text("Generate next conversation")
+                                    .disabled(!canStartConv)
+                            }
+                        }.frame(height: 50)
+                    }
+                    
+                    
+                    
+                    
                 }
+                
+                
+                
+                
+                
+                
             }
-        }.padding([.top, .bottom])
-            .onChange(of: messages) { oldValue, newValue in
-                scrollToBottom()
-                scrollToBottom2()
-            }
+            
+            ScrollView {
+                ScrollViewReader { proxy in
+                    VStack{
+                        ForEach(messages, id: \.self) { currMessage in
+                            MessageView(name: currMessage.user, messageText: currMessage.message, order: users.firstIndex(of: currMessage.user)!).id(currMessage.id)
+                        }.onAppear {
+                            scrollProxy = proxy
+                        }
+                        Spacer()
+                    }
+                }
+            }.padding([.top, .bottom])
+                .onChange(of: messages) { oldValue, newValue in
+                    scrollToBottom()
+                    scrollToBottom2()
+                }
+        }
     }
     
     func findOtherString(givenString: String) -> String {
