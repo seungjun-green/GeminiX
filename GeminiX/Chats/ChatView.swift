@@ -46,21 +46,21 @@ struct ChatView: View {
                             .padding(.bottom)
                         
                         
-                        
-                        Button {
-                            editingMode.toggle()
-                        } label: {
-                            HStack{
-                                Text("Edit")
-                                
-                                Spacer()
-                                
-                                Image(systemName: "slider.horizontal.3")
-                            }.font(.title3)
-                                .fontWeight(.medium)
-                                .padding(.horizontal)
-                            
-                        }.frame(maxWidth: .infinity)
+//                        
+//                        Button {
+//                            editingMode.toggle()
+//                        } label: {
+//                            HStack{
+//                                Text("Edit")
+//                                
+//                                Spacer()
+//                                
+//                                Image(systemName: "slider.horizontal.3")
+//                            }.font(.title3)
+//                                .fontWeight(.medium)
+//                                .padding(.horizontal)
+//                            
+//                        }.frame(maxWidth: .infinity)
                         
                         Divider()
                         
@@ -73,7 +73,7 @@ struct ChatView: View {
                                         selectedChat = chat
                                     }) {
                                         HStack {
-                                            Text(chat.name)
+                                            Text(chat.name).lineLimit(1)
                                             Spacer()
                                         }
                                         .frame(maxWidth: .infinity)

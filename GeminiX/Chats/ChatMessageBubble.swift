@@ -73,13 +73,8 @@ struct MessageBubble: View {
                         
                         
                         Button {
-                            // copy
                             UIPasteboard.general.string =  text
-                            
-                            // change buttom view to "text copied"
                             textCopied = true
-                            
-                            // after 3 seconds change the text back to original
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                                 textCopied = false
                             }

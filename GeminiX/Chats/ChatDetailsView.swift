@@ -178,10 +178,10 @@ Input:
                     
                     
                 }
-                .padding()
+                .padding(3)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(.blue, lineWidth: 2)
+                        .stroke(.blue, lineWidth: 1)
                 )
                 .padding()
                 
