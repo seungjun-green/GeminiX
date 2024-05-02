@@ -60,11 +60,21 @@ struct AIVSAI: View {
         
         VStack{
             
-            AIVSAISetting(user1: $user1, user2: $user2, users: $users, selectedUser: $selectedUser, firstMessage: $firstMessage, hide: $hideSetting)
-            
+            AIVSAISetting(user1: $user1, user2: $user2, users: $users, selectedUser: $selectedUser, firstMessage: $firstMessage, hide: $hideSetting).padding(.top)
             
             
             HStack{
+                Spacer()
+                
+                Button {
+                    messages = []
+                } label: {
+                    Label("Clear Chat History", systemImage: "xmark.circle")
+                }
+            }.padding()
+            
+            HStack{
+                
                 Button {
                     if messages.count == 0 {
                         hideSetting = true
@@ -78,19 +88,15 @@ struct AIVSAI: View {
                 } label: {
                     VStack{
                         if generating {
-                            Text("Generating...")
+                            ProgressView()
                         } else {
-                            Text("Generate next conv").disabled(!canStartConv)
+                            Text("Generate next conversation").disabled(!canStartConv)
                         }
                     }
                 }
                 
                 
-                Button {
-                    messages = []
-                } label: {
-                    Text("Clear Chat History")
-                }
+                
                 
             }
             
