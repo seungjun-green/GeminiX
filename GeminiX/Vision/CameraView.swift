@@ -19,11 +19,16 @@ struct CameraView: View {
     
     var body: some View {
         if let image {
-            Image(image, scale: 2.0, orientation: .left, label: label).resizable()
+            Image(image, scale: 1.0, orientation: .rightMirrored, label: label).resizable()
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
         } else {
-            Text("dd")
+            VStack{
+                Spacer()
+                Text("Loading Camera View")
+                Spacer()
+            }
+            
         }
     }
 }

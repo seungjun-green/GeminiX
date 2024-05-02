@@ -33,9 +33,9 @@ class CameraHandler: NSObject, ObservableObject {
         }
         
         if permissionGranted || !notFirstTime {
-            print("this part should be run twice!!!!")
+            print("this part should not be run twice!!!!")
             
-            startCaptureSessionWithDelay()
+            startCaptureSession()
         }
     }
     
@@ -64,31 +64,7 @@ class CameraHandler: NSObject, ObservableObject {
 
     }
     
-    func tttt() {
-        captureSession.stopRunning()
-    }
-    
-    public func stopCaptureSession2() {
-        sessionQueue.async { [unowned self] in
-            captureSession.stopRunning()
 
-            for input in captureSession.inputs {
-                captureSession.removeInput(input)
-            }
-            for output in captureSession.outputs {
-                captureSession.removeOutput(output)
-            }
-        }
-    }
-    
-    public func startCaptureSessionWithDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
-            sessionQueue.async {
-                self.setupCaptureSession()
-                self.captureSession.startRunning()
-            }
-        }
-    }
     
     public func checkPermission() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -105,7 +81,7 @@ class CameraHandler: NSObject, ObservableObject {
         AVCaptureDevice.requestAccess(for: .video) { [unowned self] granted in
             self.permissionGranted = granted
             if granted {
-                self.startCaptureSessionWithDelay()
+                self.startCaptureSession()
             }
         }
     }

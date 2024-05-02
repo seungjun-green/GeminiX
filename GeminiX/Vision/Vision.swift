@@ -16,54 +16,63 @@ struct Vision: View {
     @State var holdView = false
     
     let modelManager = ModelManager()
-    
-    var body: some View {        
+        
+    var body: some View {
+        
         VStack{
-            if !notFirstTime && !moveToMain {
-                PermissionView(moveToMain: $moveToMain).environmentObject(cameraManager)
-            } else {
-                if holdView {
-                    Text("HOOOOOLD")
+            VStack{
+                if !notFirstTime && !moveToMain {
+                    PermissionView(moveToMain: $moveToMain).environmentObject(cameraManager)
                 } else {
-                    CameraView(image: cameraManager.frame).environmentObject(cameraManager).ignoresSafeArea()
+                    if holdView {
+                        Text("HOOOOOLD")
+                    } else {
+                        CameraView(image: cameraManager.frame).environmentObject(cameraManager).ignoresSafeArea()
+                    }
+                   
                 }
-               
             }
+            
+            
+
+            
+            VStack{
+                if holdView {
+                    Button {
+                        cameraManager.startCaptureSession()
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            holdView = false
+                        }
+                        
+                    } label: {
+                        Text("ReStart")
+                    }
+                } else {
+                    Button {
+                        holdView = true
+                        cameraManager.stopCaptureSession()
+                    } label: {
+                        Text("Stop")
+                    }
+                    
+                    
+                    Button {
+                        askQuestion()
+                    } label: {
+                        Text("Ask Question")
+                    }
+
+                }
+            }.padding(.bottom)
         }.onDisappear{
             cameraManager.stopCaptureSession()
         }
         
         
-
         
         
-        if holdView {
-            Button {
-                cameraManager.startCaptureSessionWithDelay()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                    holdView = false
-                }
-                
-            } label: {
-                Text("ReStart")
-            }
-        } else {
-            Button {
-                holdView = true
-                cameraManager.stopCaptureSession()
-            } label: {
-                Text("Stop")
-            }
-            
-            
-            Button {
-                askQuestion()
-            } label: {
-                Text("Ask Question")
-            }
-
-        }
+        
     }
     
     func askQuestion() {

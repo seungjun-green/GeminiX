@@ -8,16 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {    
+    // @ObservedObject var cameraManager = CameraHandler()
     @State private var currentMode = "ChatMode"
     let modes = ["ChatMode", "PromptEng", "Vision", "Simulation"]
+    
     var body: some View {
         VStack{
+            
             Picker("", selection: $currentMode) {
                 ForEach(modes, id: \.self) {
                     Text($0)
                 }
             }
             .pickerStyle(.segmented)
+         
             
             
             switch(currentMode) {
@@ -28,4 +32,9 @@ struct ContentView: View {
             }
         }
     }
+}
+
+
+class SharedViewModel: ObservableObject {
+    @Published var isCameraLoading: Bool  = false
 }
