@@ -7,6 +7,32 @@
 - [Demo Video](https://www.youtube.com/watch?v=0W3M1gbAMG4&ab_channel=SeungjunLee)
 - [DevPost](https://devpost.com/software/geminix)
 
+
+## How to test this app
+
+Step 1: Prepare Your Environment
+
+Create a new folder on your computer.
+Open your terminal, and navigate to the newly created folder.
+
+Step 2: Clone the Repository
+
+Clone the GeminiX repository by entering the following command:
+```
+git clone https://github.com/seungjun-green/GeminiX.git
+```
+
+Step 3: Open the Project
+Navigate to the GeminiX folder, and then to GeminiX/GeminiX.xcodeproj using your terminal or file explorer.
+
+Step 4: Run the Application
+
+Open the project in Xcode.
+Press Cmd + R to run the app.
+
+Chats, Custom Prompts, and Simulation: These features can be tested on macOS using Mac Catalyst and iOS both.
+Vision: Currently this feature is only availbe on iOS, so please select either an iPhone or iPad as your target device in Xcode.
+
 ## Inspiration
 
 ### Chats
