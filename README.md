@@ -10,21 +10,19 @@
 
 ## How to test this app
 
-**Step 1: Prepare Your Environment**
-Create a new folder on your computer.
-Open your terminal, and navigate to the newly created folder.
+**Step 1: Clone the Repository**
 
-**Step 2: Clone the Repository**
+Create a new folder on your computer. Open your terminal, and navigate to the newly created folder.
+Then clone the GeminiX repository by entering the following command:
 
-Clone the GeminiX repository by entering the following command:
 ```
 git clone https://github.com/seungjun-green/GeminiX.git
 ```
 
-**Step 3: Open the Project**
+**Step 2: Open the Project**
 Navigate to the GeminiX folder, and then to GeminiX/GeminiX.xcodeproj using your terminal or file explorer.
 
-**Step 4: Run the Application**
+**Step 3: Run the Application**
 
 Open the project in Xcode.
 Press Cmd + R to run the app.
