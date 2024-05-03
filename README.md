@@ -1,4 +1,7 @@
 # GeminiX
+![GeminiX (1)](https://github.com/seungjun-green/GeminiX/assets/60959924/2d6488b7-658e-419e-b964-74fcfae1d6a7)
+
+
 
 ## Important Links
 - [Demo Video](https://www.youtube.com/watch?v=0W3M1gbAMG4&ab_channel=SeungjunLee)
