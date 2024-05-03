@@ -1,7 +1,7 @@
 # GeminiX
 
 ## Important Links
-- [Demo Video]()
+- [Demo Video](https://www.youtube.com/watch?v=0W3M1gbAMG4&ab_channel=SeungjunLee)
 - [DevPost](https://devpost.com/software/geminix)
 
 ## Inspiration
