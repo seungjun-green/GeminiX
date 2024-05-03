@@ -50,7 +50,6 @@ struct TitleView: View {
 }
 
 
-
 struct GeminiMessage: Codable, Identifiable, Hashable {
     var id = UUID()
     var date = Date()

@@ -48,25 +48,32 @@ struct MessageBubble: View {
                         
                         
                         Button {
-                            if isSpeaking {
-                                speechManager.stopSpeaking()
-                                isSpeaking = false
-                            } else {
+                           
                                 isSpeaking = true
                                 speechManager.speak(text: text)
                                 isSpeaking = false
-                            }
                         } label: {
                             
-                            if isSpeaking {
+                           
+                                Image(systemName: "speaker.wave.3.fill")
+                                    .frame(width: 20)
+                                    .foregroundColor(.secondary)                            
+                            
+                            
+                        }.buttonStyle(PlainButtonStyle())
+                        
+                        
+                        Button {
+                                speechManager.stopSpeaking()
+                                isSpeaking = false
+                        } label: {
+                            
                                 Image(systemName: "stop.circle.fill")
                                     .frame(width: 20)
                                     .foregroundColor(.secondary)
-                            } else {
-                                Image(systemName: "speaker.wave.3.fill")
-                                    .frame(width: 20)
-                                    .foregroundColor(.secondary)
-                            }
+                            
+                            
+                            
                             
                             
                         }.buttonStyle(PlainButtonStyle())

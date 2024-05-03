@@ -18,9 +18,7 @@ struct AIVSAI: View {
     //    @State private var user2 = ""
     @State private var user1 = "Student"
     @State private var user2 = "Teacher"
-    
-    
-    
+        
     //    @State private var users = ["Not defined", "Not defined"]
     @State private var users = ["Student", "Teacher"]
     
