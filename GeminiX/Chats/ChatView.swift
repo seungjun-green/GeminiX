@@ -46,22 +46,6 @@ struct ChatView: View {
                             .padding(.bottom)
                         
                         
-//                        
-//                        Button {
-//                            editingMode.toggle()
-//                        } label: {
-//                            HStack{
-//                                Text("Edit")
-//                                
-//                                Spacer()
-//                                
-//                                Image(systemName: "slider.horizontal.3")
-//                            }.font(.title3)
-//                                .fontWeight(.medium)
-//                                .padding(.horizontal)
-//                            
-//                        }.frame(maxWidth: .infinity)
-                        
                         Divider()
                         
                         ScrollViewReader { proxy in

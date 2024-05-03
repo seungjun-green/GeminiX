@@ -51,14 +51,16 @@ struct CustomPromptsView: View {
                                 
                                 Button(action: {
                                     selectedPrompt = customPrompt
+                                    print("Selected Prompt Updated: \(selectedPrompt?.name ?? "None")")
                                 }) {
                                     HStack {
                                         Text(customPrompt.name)
                                         Spacer()
-                                    }.frame(maxWidth: .infinity)
-                                        .padding()
-                                        .background(selectedPrompt?.id == customPrompt.id ? Color.blue : Color.clear)
-                                        .cornerRadius(8)
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .background(selectedPrompt?.id == customPrompt.id ? Color.blue : Color.clear)
+                                    .cornerRadius(8)
                                 }.id(customPrompt.id)
                                 
                                 
@@ -68,15 +70,14 @@ struct CustomPromptsView: View {
                         
                         
                     }
-                    .navigationTitle("Prompts")
                     
                 }
                 
             }.navigationTitle("Prompts")
         } detail: {
-            
+                
             if let selectedPrompt = selectedPrompt {
-                PromptDetailsView(modelManager: modelManager, prompt: selectedPrompt)
+                PromptDetailsView(modelManager: modelManager, prompt: selectedPrompt).id(selectedPrompt.id)
             } else {
                 Text("Please select a prompt")
                     .font(.title)
