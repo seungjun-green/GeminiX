@@ -20,6 +20,7 @@ git clone https://github.com/seungjun-green/GeminiX.git
 ```
 
 **Step 2: Open the Project**
+
 Navigate to the GeminiX folder, and then to GeminiX/GeminiX.xcodeproj using your terminal or file explorer.
 
 **Step 3: Run the Application**
