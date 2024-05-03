@@ -29,6 +29,7 @@ Open the project in Xcode.
 Press Cmd + R to run the app.
 
 Chats, Custom Prompts, and Simulation: These features can be tested on macOS using Mac Catalyst and iOS both.
+
 Vision: Currently this feature is only availbe on iOS, so please select either an iPhone or iPad as your target device in Xcode.
 
 ## Inspiration
